@@ -478,7 +478,7 @@ void SecureContext::Initialize(Environment* env, Local<Object> target) {
   env->SetProtoMethod(t, "addCACert", AddCACert);
   env->SetProtoMethod(t, "addCRL", AddCRL);
   env->SetProtoMethod(t, "addRootCerts", AddRootCerts);
-  env->SetProtoMethod(t, "setCipherSuites", SetCipherSuites);
+  env->SetProtoMethod(t,		"setCipherSuites", SetCipherSuites);
   env->SetProtoMethod(t, "setCiphers", SetCiphers);
   env->SetProtoMethod(t, "setSigalgs", SetSigalgs);
   env->SetProtoMethod(t, "setECDHCurve", SetECDHCurve);
@@ -7140,6 +7140,7 @@ void Initialize(Local<Object> target,
                                          EVP_PKEY_verify_recover_init,
                                          EVP_PKEY_verify_recover>);
 #ifndef OPENSSL_NO_SCRYPT
+  // 将方法导出，最终将由internalBinding() / process.binding() 进行调用。
   env->SetMethod(target, "scrypt", Scrypt);
 #endif  // OPENSSL_NO_SCRYPT
 }
